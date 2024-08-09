@@ -1,0 +1,14 @@
+HOW TO CREATE A BEATMAP
+
+1. Folder Creation:
+   - Start by creating a folder with the title of your beatmap.
+
+2. Notes Text File:
+   - Inside this folder, create a text file named "notes.txt".
+   - Ensure that the file begins with "0 0".
+   - For each note, indicate the time (in seconds) and the corresponding key (1, 2, 3, or 4), separated by a space.
+   - List each note on a new line.
+
+3. Audio File:
+   - Include the song in the beatmap folder in .mp3 format.
+   - The audio file must share the same name as the beatmap title.
