@@ -452,20 +452,20 @@ def menu():
                     sys.exit()
         # Cambia el color del texto si el ratón pasa por encima
         if rect_play.collidepoint(pygame.mouse.get_pos()):
-            text_play = font.render("Jugar", True, PINK)
+            text_play = font.render("PLAY", True, PINK)
 
         else:
-            text_play = font.render("Jugar", True, WHITE)
+            text_play = font.render("PLAY", True, WHITE)
 
         if rect_options.collidepoint(pygame.mouse.get_pos()):
-            text_options = font.render("Opciones", True, PINK)
+            text_options = font.render("OPTIONS", True, PINK)
         else:
-            text_options = font.render("Opciones", True, WHITE)
+            text_options = font.render("OPTIONS", True, WHITE)
 
         if rect_exit.collidepoint(pygame.mouse.get_pos()):
-            text_exit = font.render("Salir", True, PINK)
+            text_exit = font.render("EXIT", True, PINK)
         else:
-            text_exit = font.render("Salir", True, WHITE)
+            text_exit = font.render("EXIT", True, WHITE)
 
         pygame.display.update()
 
@@ -490,10 +490,10 @@ def select():
     LIGHT_BLUE = (0, 162, 255)
 
     # Fuente
-    font = pygame.font.Font(None, 36)
+    font = pygame.font.Font(None, 50)
 
     # Velocidad de desplazamiento
-    SCROLL_SPEED = 20
+    SCROLL_SPEED = 100
 
     # Definir clase para los botones de las carpetas
     class BotonCarpeta:
@@ -504,10 +504,10 @@ def select():
 
         def draw(self, surface, offset_y):
             rect_moved = self.rect.move(0, offset_y)
-            color = LIGHT_BLUE if self.hovered else BLUE
-            pygame.draw.rect(surface, color, rect_moved)
+            color = (255, 75, 150) if self.hovered else black2
+            pygame.draw.rect(surface, color, rect_moved, border_radius=35)
             text_surface = font.render(self.carpeta, True, WHITE)
-            surface.blit(text_surface, (rect_moved.x + 10, rect_moved.y + 10))
+            surface.blit(text_surface, (rect_moved.x + 20, rect_moved.y + 30))
 
         def is_hovered(self, mouse_pos, offset_y):
             rect_moved = self.rect.move(0, offset_y)
@@ -522,11 +522,11 @@ def select():
                 if os.path.isdir(os.path.join(ruta, nombre))
             ]
             botones = []
-            y = 50
+            y = 200
             for carpeta in carpetas:
-                boton_rect = pygame.Rect(50, y, 700, 50)
+                boton_rect = pygame.Rect(50, y, 1920 - 100, 150)
                 botones.append(BotonCarpeta(boton_rect, carpeta))
-                y += 60
+                y += 180
             return botones
         except Exception as e:
             print(f"Error al intentar listar carpetas: {e}")
@@ -580,13 +580,7 @@ def select():
         scroll_change = manejar_eventos(botones, offset_y)
         offset_y += scroll_change
 
-        # Limitar el desplazamiento para no mostrar espacio vacío
-        if offset_y > max_offset:
-            offset_y = max_offset
-        if offset_y < min_offset:
-            offset_y = min_offset
-
-        screen.fill(WHITE)
+        screen.fill(black3)
         dibujar_botones(botones, offset_y)
         pygame.display.update()
         clock.tick(60)
